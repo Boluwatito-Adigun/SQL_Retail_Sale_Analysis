@@ -1,0 +1,1 @@
+CREATE DATABASE p1_retail_db;
