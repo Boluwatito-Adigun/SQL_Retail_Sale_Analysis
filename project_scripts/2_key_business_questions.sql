@@ -80,3 +80,40 @@ GROUP BY 1, 2
      rank = 1
  order by 
     month;
+
+-- Q.8 The top 5 customers based on the highest total sales 
+SELECT 
+    customer_id,
+    SUM(total_sale) AS net_sales
+FROM
+    retail_sales
+GROUP BY 
+    customer_id
+Order by
+    net_sales DESC
+LIMIT 5;
+
+-- Q.9 The number of unique customers who purchased items from each category.
+SELECT 
+    category,
+    count (DISTINCT customer_id) AS uni_customers
+FROM 
+    retail_sales
+GROUP BY
+    category;
+
+
+-- Q.10 Each shift and number of orders (Example Morning <12, Afternoon Between 12 & 17, Evening >17)
+
+        SELECT 
+            count(transactions_id) AS number_of_orders,
+        CASE
+            WHEN sale_time < '12:00:00' THEN 'Morning'
+            WHEN sale_time BETWEEN '12:00:01' AND '17:00:00' THEN 'Afternoon'
+            WHEN sale_time > '17:00:00' THEN 'Evening'
+        END AS shift
+
+        FROM 
+            retail_sales
+        GROUP BY
+            shift
